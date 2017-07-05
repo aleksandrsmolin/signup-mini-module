@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
 
+import '../styles/style.css';
 
 
 class Header extends Component {
@@ -9,11 +9,14 @@ class Header extends Component {
   }
 
   render() {
-      return (
-          <div >
-            <p> Signup </p>
-          </div>
-      );
+    return (
+      <div className="header" >
+        <h3 className="h3"> Signup </h3>
+        <div className="progress-bar">
+        <div className="first-progress-bar" />
+        </div>
+      </div>
+    );
   }
 }
 

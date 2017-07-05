@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
 
+import '../styles/style.css';
 
 
 class Footer extends Component {
@@ -9,11 +9,11 @@ class Footer extends Component {
   }
 
   render() {
-      return (
-          <div >
-            <p> Kuuuurva </p>
-          </div>
-      );
+    return (
+      <div className="footer">
+        <button className="footer-button-next"> Next </button>
+      </div>
+    );
   }
 }
 
