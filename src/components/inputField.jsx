@@ -17,4 +17,4 @@ class InputField extends Component {
   }
 }
 
-export default Game;
+export default InputField;
