@@ -11,7 +11,7 @@ class InputField extends Component {
   render() {
     return (
       <div className="inputField">
-        <FinalInputField />
+        <SecondInputField />
       </div>
     );
   }
