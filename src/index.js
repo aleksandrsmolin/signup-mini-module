@@ -1,18 +1,18 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-
-import Body from './containers/body';
-
-
 import { Provider } from 'react-redux';
-import Store from './store';
+import store from './store';
+import showResults from './showResults';
+import InputField from './containers/inputField';
 
-const StoreInstance = Store();
+const rootEl = document.getElementById('root');
 
 ReactDOM.render(
-  <Provider store={StoreInstance}>
-    <Body />
+  <Provider store={store}>
+    <div style={{ padding: 15 }}>
+      <InputField onSubmit={showResults} />
+    </div>
   </Provider>,
-  document.getElementById('root')
-)
+  rootEl,
+);
 

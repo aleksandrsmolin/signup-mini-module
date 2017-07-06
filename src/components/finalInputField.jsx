@@ -1,20 +1,24 @@
-import React, { Component } from 'react';
-import '../styles/style.css';
+import React from 'react';
+import { reduxForm } from 'redux-form';
+import validate from '../validate';
 
-
-class FinalInputField extends Component {
-  constructor(props) {
-    super(props);
-  }
-
-  render() {
-    return (
-      <div className="finalInputField">
-        <img className="img" src={require('../styles/email.svg')} alt="some shit" />
-        <button className="finalInputField-button">Go to Dashboard</button>
+const FinalInputField = props => {
+  const { handleSubmit, pristine, submitting } = props;
+  return (
+    <form onSubmit={handleSubmit}>
+      <div>
+        Some shit
       </div>
-    );
-  }
-}
+      <div>
+        <button type="submit" disabled={pristine || submitting}>Submit</button>
+      </div>
+    </form>
+  );
+};
+export default reduxForm({
+  form: 'wizard', //                 <------ same form name
+  destroyOnUnmount: false, //        <------ preserve form data
+  forceUnregisterOnUnmount: true, // <------ unregister fields on unmount
+  validate,
+})(FinalInputField);
 
-export default FinalInputField;

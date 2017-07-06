@@ -1,35 +1,92 @@
-import React, { Component } from 'react';
-import '../styles/style.css';
+import React from 'react';
+import { Field, reduxForm } from 'redux-form';
+import validate from '../validate';
 
-class SecondInputField extends Component {
-  constructor(props) {
-    super(props);
-  }
+const reasons = ['Coz', 'You shall not pass', 'reson1', 'reason2', 'reason3', 'money', 'beer'];
 
-  render() {
-    return (
-      <div className="secondInputField">
+const renderError = ({ meta: { touched, error } }) =>
+  touched && error ? <span>{error}</span> : false;
+
+const renderReasonsSelector = ({ input, meta: { touched, error } }) => (
+  <div>
+    <select {...input}>
+      <option value="">Select a color...</option>
+      {reasons.map(val => <option value={val} key={val}>{val}</option>)}
+    </select>
+    {touched && error && <span>{error}</span>}
+  </div>
+);
+
+const SecondInputField = props => {
+  const { handleSubmit, previousPage } = props;
+  return (
+    <form onSubmit={handleSubmit}>
+      <div>
+        <label>Date of Birth</label>
         <div>
-          <p> DATE OF BIRTH </p>
-          <div className="ageSection">
-            <input className="secondInputField-age-input" type="text" placeholder="DD" />
-            <input className="secondInputField-age-input" type="text" placeholder="MM" />
-            <input className="secondInputField-age-input" type="text" placeholder="YY" />
-          </div>
-        </div>
-        <div>
-          <p> GENDER </p>
-          <button className="secondInputField-gen-button">MALE </button>
-          <button className="secondInputField-gen-button">FEMALE </button>
-          <button className="secondInputField-gen-button">UNSPECIFIED </button>
-        </div>
-        <div>
-          <p> WHERE DID YOU HEAR ABOUT IS? </p>
-          <input className="secondInputField-dropdown" type="text" placeholder="dropdownMenu" />
+          <label>
+            <Field name="day" component="input" type="number" />
+            {' '}
+            DD
+            <Field name="day" component={renderError} />
+          </label>
+          <label>
+            <Field name="month" component="input" type="number" />
+            {' '}
+            MM
+            <Field name="month" component={renderError} />
+          </label>
+          <label>
+            <Field name="year" component="input" type="number" />
+            {' '}
+            YY
+            <Field name="year" component={renderError} />
+          </label>
         </div>
       </div>
-    );
-  }
-}
 
-export default SecondInputField;
+
+      <div>
+        <label>Sex</label>
+        <div>
+          <label>
+            <Field name="sex" component="input" type="radio" value="male" />
+            {' '}
+            Male
+          </label>
+          <label>
+            <Field name="sex" component="input" type="radio" value="female" />
+            {' '}
+            Female
+          </label>
+          <label>
+            <Field name="sex" component="input" type="radio" value="unspecified" />
+            {' '}
+            Unspecified
+          </label>
+          <Field name="sex" component={renderError} />
+        </div>
+      </div>
+
+
+      <div>
+        <label>Where did you hear about as?</label>
+        <Field name="favoriteColor" component={renderReasonsSelector} />
+      </div>
+      <div>
+        <button type="button" className="previous" onClick={previousPage}>
+          Previous
+        </button>
+        <button type="submit" className="next">Next</button>
+      </div>
+    </form>
+  );
+};
+
+export default reduxForm({
+  form: 'wizard', //                 <------ same form name
+  destroyOnUnmount: false, //        <------ preserve form data
+  forceUnregisterOnUnmount: true, // <------ unregister fields on unmount
+  validate,
+})(SecondInputField);
+
