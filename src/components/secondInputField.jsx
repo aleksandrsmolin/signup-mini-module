@@ -1,6 +1,7 @@
 import React from 'react';
 import { Field, reduxForm } from 'redux-form';
 import validate from '../validate';
+import '../styles/style.css';
 
 const reasons = ['Coz', 'You shall not pass', 'reson1', 'reason2', 'reason3', 'money', 'beer'];
 
@@ -10,12 +11,33 @@ const renderError = ({ meta: { touched, error } }) =>
 const renderReasonsSelector = ({ input, meta: { touched, error } }) => (
   <div>
     <select {...input}>
-      <option value="">Select a color...</option>
+      <option value="">Select a reason...</option>
       {reasons.map(val => <option value={val} key={val}>{val}</option>)}
     </select>
     {touched && error && <span>{error}</span>}
   </div>
 );
+
+function validateDay(event) {
+  const value = document.getElementById('day').value;
+  if (value > 31 || /([e])/g.test(event.target.value)) {
+    return event.preventDefault();
+  }
+}
+
+function validateMonth(event) {
+  const value = document.getElementById('month').value;
+  if (value > 12) {
+    return event.preventDefault();
+  }
+}
+
+function validateYear(event) {
+  const value = document.getElementById('year').value;
+  if (value > 2017) {
+    return event.preventDefault();
+  }
+}
 
 const SecondInputField = props => {
   const { handleSubmit, previousPage } = props;
@@ -25,22 +47,26 @@ const SecondInputField = props => {
         <label>Date of Birth</label>
         <div>
           <label>
-            <Field name="day" component="input" type="number" />
-            {' '}
             DD
+            <Field name="day" id="day" component="input" type="number" onChange={(e) => validateDay(e)} />
+            {' '}
             <Field name="day" component={renderError} />
           </label>
           <label>
-            <Field name="month" component="input" type="number" />
-            {' '}
             MM
+            <Field name="month" id="month" component="input" type="number" onChange={(e) => validateMonth(e)} />
+            {' '}
             <Field name="month" component={renderError} />
           </label>
           <label>
-            <Field name="year" component="input" type="number" />
-            {' '}
             YY
+            <Field name="year" id="year" component="input" type="number" onChange={(e) => validateYear(e)} />
+            {' '}
+
             <Field name="year" component={renderError} />
+          </label>
+          <label>
+            <Field name="age" component={renderError} />
           </label>
         </div>
       </div>
@@ -73,7 +99,7 @@ const SecondInputField = props => {
         <label>Where did you hear about as?</label>
         <Field name="favoriteColor" component={renderReasonsSelector} />
       </div>
-      <div>
+      <div className="footer">
         <button type="button" className="previous" onClick={previousPage}>
           Previous
         </button>

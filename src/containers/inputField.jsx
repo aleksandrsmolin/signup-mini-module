@@ -4,8 +4,6 @@ import FirstInputField from '../components/firstInputField';
 import SecondInputField from '../components/secondInputField';
 import FinalInputField from '../components/finalInputField';
 
-import '../styles/style.css';
-
 
 class InputField extends Component {
   constructor(props) {

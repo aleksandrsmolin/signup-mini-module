@@ -5,6 +5,8 @@ import store from './store';
 import showResults from './showResults';
 import InputField from './containers/inputField';
 
+import './styles/style.css';
+
 const rootEl = document.getElementById('root');
 
 ReactDOM.render(

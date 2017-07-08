@@ -1,6 +1,5 @@
 
 .footer {
-    text-align: right;
     border-top-style: solid;
     border-top-color: gray;
     border-top-width: 1px;
@@ -38,7 +37,7 @@
     margin-top: 80px;
 }
 
-.firstInputField-input-normal {
+.firstInputField-input {
     width: 100%;
     margin-top: 5px;
     margin-bottom: 15px;
@@ -100,10 +99,7 @@
     text-align: center;
     color: skyblue;
     font-size: 20px;
-}
-
-.h3 {
-        font-variant: small-caps;
+    font-variant: small-caps;
 }
 
 .finalInputField {
