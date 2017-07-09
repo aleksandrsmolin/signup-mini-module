@@ -1,11 +1,11 @@
 import React from 'react';
+import './styles/style.css';
 
 const renderField = ({ input, label, type, meta: { touched, error } }) => (
   <div>
-    <label>{label}</label>
+    {!error ? <label className="lable-title">{label}</label> : <span className="title-error">{error}</span> }
     <div>
-      <input {...input} placeholder={label} type={type} />
-      {touched && error && <span>{error}</span>}
+      <input className="firstInputField-input" {...input} type={type} />
     </div>
   </div>
 );

@@ -10,11 +10,11 @@ const renderError = ({ meta: { touched, error } }) =>
 
 const renderReasonsSelector = ({ input, meta: { touched, error } }) => (
   <div>
-    <select {...input}>
-      <option value="">Select a reason...</option>
+    <select className="secondInputField-dropdown" {...input}>
+      <option value=""></option>
       {reasons.map(val => <option value={val} key={val}>{val}</option>)}
     </select>
-    {touched && error && <span>{error}</span>}
+    {touched && error && <span className="title-error">{error}</span>}
   </div>
 );
 
@@ -43,67 +43,105 @@ const SecondInputField = props => {
   const { handleSubmit, previousPage } = props;
   return (
     <form onSubmit={handleSubmit}>
-      <div>
-        <label>Date of Birth</label>
-        <div>
-          <label>
-            DD
-            <Field name="day" id="day" component="input" type="number" onChange={(e) => validateDay(e)} />
-            {' '}
-            <Field name="day" component={renderError} />
-          </label>
-          <label>
-            MM
-            <Field name="month" id="month" component="input" type="number" onChange={(e) => validateMonth(e)} />
-            {' '}
-            <Field name="month" component={renderError} />
-          </label>
-          <label>
-            YY
-            <Field name="year" id="year" component="input" type="number" onChange={(e) => validateYear(e)} />
-            {' '}
-
-            <Field name="year" component={renderError} />
-          </label>
-          <label>
-            <Field name="age" component={renderError} />
-          </label>
-        </div>
+      <div> 
+        <h3 className="header" >
+          Signup
+        </h3>
       </div>
-
-
-      <div>
-        <label>Sex</label>
-        <div>
-          <label>
-            <Field name="sex" component="input" type="radio" value="male" />
-            {' '}
-            Male
-          </label>
-          <label>
-            <Field name="sex" component="input" type="radio" value="female" />
-            {' '}
-            Female
-          </label>
-          <label>
-            <Field name="sex" component="input" type="radio" value="unspecified" />
-            {' '}
-            Unspecified
-          </label>
-          <Field name="sex" component={renderError} />
-        </div>
+      <div className="progress-bar" >
+        <div className="second-progress-bar" />
       </div>
+      <div className="secondInputField" >
+        <div>
+          <h3 className="secondInputField-header" >DATE OF BIRTH</h3>
+          <div className="secondInputField-age-input-field" >
+            <label>
+              <Field
+                className="secondInputField-age-input right-border"
+                placeholder="DD"
+                name="day"
+                id="day"
+                component="input"
+                type="number"
+                onChange={(e) => validateDay(e)}
+              />
+            </label>
+            <label>
+              <Field
+                className="secondInputField-age-input"
+                placeholder="MM"
+                name="month"
+                id="month"
+                component="input"
+                type="number"
+                onChange={(e) => validateMonth(e)}
+              />
+            </label>
+            <label>
+              <Field
+                className="secondInputField-age-input left-border"
+                placeholder="YYYY"
+                name="year"
+                id="year"
+                component="input"
+                type="number"
+                onChange={(e) => validateYear(e)}
+              />
+            </label>
+          </div>
+            <label>
+              <Field className="title-error" name="age" component={renderError} />
+            </label>
+        </div>
 
 
-      <div>
-        <label>Where did you hear about as?</label>
-        <Field name="favoriteColor" component={renderReasonsSelector} />
+        <div  >
+          <h3 className="secondInputField-header" >GENDER</h3>
+          <div className="secondInputField-sex-input">
+            <label className="secondInputField-sex-button right-border">
+              <Field
+                name="sex"
+                id="male"
+                component="input"
+                placeholder="MALE"
+                type="button"
+                value="male"
+              />
+            </label>
+            <label className="secondInputField-sex-button" >
+              <Field
+                name="sex"
+                id="female"
+                component="input"
+                placeholder="FEMALE"
+                type="button"
+                value="female"
+              />
+            </label>
+            <label className="secondInputField-sex-button left-border">
+              <Field
+                name="sex"
+                id="unspecified"
+                component="input"
+                type="button"
+                value="unspecified"
+                placeholder="UNSPECIFIED"
+              />
+            </label>
+          </div>
+          <Field className="title-error" name="sex" component={renderError} />
+        </div>
+
+        <div>
+          <h3 className="secondInputField-header" >WHERE DID YOU HEAR ABOUT AS?</h3>
+          <Field name="favoriteColor" component={renderReasonsSelector} />
+        </div>
       </div>
       <div className="footer">
-        <button type="button" className="previous" onClick={previousPage}>
-          Previous
+        <button type="button" className="footer-button-previous" onClick={previousPage}>
+          Back
         </button>
-        <button type="submit" className="next">Next</button>
+        <button type="submit" className="footer-button-next">Next</button>
       </div>
     </form>
   );

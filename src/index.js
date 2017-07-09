@@ -11,7 +11,7 @@ const rootEl = document.getElementById('root');
 
 ReactDOM.render(
   <Provider store={store}>
-    <div style={{ padding: 15 }}>
+    <div className="body">
       <InputField onSubmit={showResults} />
     </div>
   </Provider>,

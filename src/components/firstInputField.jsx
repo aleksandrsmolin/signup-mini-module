@@ -3,11 +3,13 @@ import { Field, reduxForm } from 'redux-form';
 import validate from '../validate';
 import renderField from '../renderField';
 
+import '../styles/style.css';
+
 const FirstInputField = props => {
   const { handleSubmit } = props;
   return (
     <form onSubmit={handleSubmit}>
-      <div> 
+      <div>
         <h3 className="header" >
           Signup
         </h3>
@@ -15,25 +17,30 @@ const FirstInputField = props => {
       <div className="progress-bar" >
         <div className="first-progress-bar" />
       </div>
-      <div className="inputField " >
-        <div className="firstInputField-input">
-          <Field name="email" type="email" component={renderField} label="Email" />
+      <div className="inputField" >
+        <div className="first-input-field" >
+          <Field
+            name="email"
+            type="email"
+            component={renderField}
+            label="EMAIL"
+          />
+          <Field
+            name="password"
+            type="text"
+            component={renderField}
+            label="PASSWORD"
+          />
+          <Field
+            name="passwordConfirm"
+            type="text"
+            component={renderField}
+            label="CONFIRM PASSWORD"
+          />
         </div>
-        <Field
-          name="password"
-          type="text"
-          component={renderField}
-          label="Password"
-        />
-        <Field
-          name="passwordConfirm"
-          type="text"
-          component={renderField}
-          label="Confirm Password"
-        />
       </div>
-      <div>
-        <button type="submit" className="next">Next</button>
+      <div className="footer" >
+        <button className="footer-button-next-1" type="submit">Next</button>
       </div>
     </form>
   );
