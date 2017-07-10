@@ -1,6 +1,7 @@
 import React from 'react';
 import { Field, reduxForm } from 'redux-form';
 import validate from '../validate';
+import renderRadio from '../renderRadio';
 import '../styles/style.css';
 
 const reasons = ['Coz', 'You shall not pass', 'reson1', 'reason2', 'reason3', 'money', 'beer'];
@@ -38,6 +39,22 @@ function validateYear(event) {
     return event.preventDefault();
   }
 }
+let LastActiveId = "malediv";
+
+const ActiveStyle = "secondInputField-sex-button-on";
+const DisableStyle = "secondInputField-sex-button-off";
+
+function onClickHandler(e) {
+  console.log(e.target.value);
+  const id = e.target.value + "div";
+  const elementToChange = document.getElementById(id);
+  return (
+    document.getElementById(LastActiveId).className = DisableStyle,
+    elementToChange.className = ActiveStyle,
+    LastActiveId = id
+  );
+}
+
 
 const SecondInputField = props => {
   const { handleSubmit, previousPage } = props;
@@ -95,46 +112,52 @@ const SecondInputField = props => {
         </div>
 
 
-        <div  >
+        <div>
           <h3 className="secondInputField-header" >GENDER</h3>
           <div className="secondInputField-sex-input">
-            <label className="secondInputField-sex-button right-border">
+            <div id="malediv" className="secondInputField-sex-button-off">
               <Field
-                name="sex"
-                id="male"
+                className="hideElement"
+                onClick={(e) => onClickHandler(e)}
                 component="input"
-                placeholder="MALE"
-                type="button"
+                type="radio"
+                name="sex"
                 value="male"
+                id="male"
               />
-            </label>
-            <label className="secondInputField-sex-button" >
+            <label htmlFor="male" className="secondInputField-sex-button-label">MALE</label>
+            </div>
+            <div id="femalediv" className="secondInputField-sex-button-off" >
               <Field
-                name="sex"
-                id="female"
+                className="hideElement"
+                onClick={(e) => onClickHandler(e)}
                 component="input"
-                placeholder="FEMALE"
-                type="button"
+                type="radio"
+                name="sex"
                 value="female"
+                id="female"
               />
-            </label>
-            <label className="secondInputField-sex-button left-border">
+              <label htmlFor="female" className="secondInputField-sex-button-label">FEMALE</label>
+            </div>
+            <div id="unspecifieddiv" className="secondInputField-sex-button-off" >
               <Field
-                name="sex"
-                id="unspecified"
+                className="hideElement"
+                onClick={(e) => onClickHandler(e)}
                 component="input"
-                type="button"
+                type="radio"
+                name="sex"
                 value="unspecified"
-                placeholder="UNSPECIFIED"
+                id="unspecified"
               />
-            </label>
+            <label htmlFor="unspecified" className="secondInputField-sex-button-label">UNSPECIFIED</label>
+            </div>
           </div>
           <Field className="title-error" name="sex" component={renderError} />
         </div>
 
         <div>
           <h3 className="secondInputField-header" >WHERE DID YOU HEAR ABOUT AS?</h3>
-          <Field name="favoriteColor" component={renderReasonsSelector} />
+          <Field name="reasonSelector" component={renderReasonsSelector} />
         </div>
       </div>
       <div className="footer">
